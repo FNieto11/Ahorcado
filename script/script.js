@@ -9,11 +9,11 @@ function comenzar() {
     fallos = 0;
     aciertos = 0;
     palabraOculta = '';
-    letrasProbadas = '';
-    letrasIncorrectas = '';
+    letraProbada = '';
+    letraIncorrecta = '';
 }
 
-function letraProbada(letra) {
+function verificarLetraProbada(letra) {
     
 }
 
