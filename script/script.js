@@ -14,10 +14,11 @@ function comenzar() {
     //dejar todo en cero para poder empezar el juego
 }
 
-function verificarLetraProbada(letra) {
+letraProbada = prompt('Ingrese una letra');
+
+function verificarLetraProbada(letraProbada) {
     //Comparar letra ingresada con letras en palabra oculta
 }
-
 
 if(fallos == 0){
     //Mostrar imagen 0
@@ -29,6 +30,10 @@ if(fallos == 0){
     //Mostrar imagen 3
 }else if(fallos == 4){
     //Mostrar imagen 4
+}else if(fallos == 5){
+    //Mostrar imagen 5
+}else {
+    //Mostrar imagen 6
 }
 
 function ganar() {
