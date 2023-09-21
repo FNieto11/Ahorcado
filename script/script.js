@@ -1,20 +1,32 @@
 function seleccionarPalabra() {
-    const palabraFacil = "CURSO";
-    const palabraMedia = "PROGRAMACION";
-    const palabraDificil = "JAVASCRIPT";
+    const palabraDefinida = {
+        palabraFacil: "CURSO",
+        palabraMedia: "PROGRAMACION",
+        palabraDificil: "JAVASCRIPT"
+    }
 
-    var entrada = prompt ('Bienvenido! Escoja el nivel de dificultad entre 1, 2 y 3')
+    function elegirPalabraAleatoria(array){
+        const indice = Math.ceil(Math.random() * array.length);
+        return array [indice];
+    }
 
-    while (entrada<1 || entrada>3) {
-        var entrada = prompt ('Ups, debes elegir entre 1, 2 y 3')
+    const palabraAleatoria = ["CURSO","PROGRAMACION","JAVASCRIPT","DESARROLLO","TECNOLOGIA","FRONTEND","BACKEND","SERVIDOR","NAVEGADOR","SITIO","WEB","HTML","CSS","FRAMEWORK","DISEÑO","DATOS","RESPONSIVE","INTERFAZ","API","DOM","FUNCION"];
+    const palabraAleatoriaElegida = elegirPalabraAleatoria(palabraAleatoria)
+
+    var entrada = prompt ('Bienvenido! Escoja el nivel de dificultad entre 1, 2 o 3. Si quiere una palabra al azar ingrese 4')
+
+    while (entrada<1 || entrada>4) {
+        var entrada = prompt ('Ups, debes elegir entre 1, 2 y 3. Puede elegir 4 si quiere una palabra al azar')
     }
 
     if (entrada == 1){
-        palabraSecreta = palabraFacil;
+        palabraSecreta = palabraDefinida.palabraFacil;
     } else if (entrada == 2) {
-        palabraSecreta = palabraMedia;
+        palabraSecreta = palabraDefinida.palabraMedia;
+    } else if (entrada == 3) {
+        palabraSecreta = palabraDefinida.palabraDificil;
     } else {
-        palabraSecreta = palabraDificil;
+        palabraSecreta = palabraAleatoriaElegida;
     }
 
     return palabraSecreta;

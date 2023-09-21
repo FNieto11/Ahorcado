@@ -1,38 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
     <link rel="stylesheet" href="./css/style.css">
     <title>Juego Ahorcado</title>
 </head>
 <body>
-    <h1 class="h1">JUEGO DEL AHORCADO</h1>
-    <img id="imagenAhorcado" src="./img/0_fallos.png" alt="Imagen juego del ahorcado">
-    <div>
-        Letras Fallidas
-    </div>
-    <div id="letrasIncorrectas">
-    
-    </div>
-    <div>
-        Palabra:
-    </div>
-    <input id="palabraOculta" type="text" placeholder="Escribe la palabra secreta y pulsa Iniciar">
-    <button id="botonIniciar">Iniciar</button>
-    <div>
-        Letra:
-    </div>
-    <input id="probarLetra" type="text" placeholder="Escribe la letra a probar">
-    <button id="botonProbar">Probar</button>
-    <div>
-        ¿Adivinaste?
-    </div>
-    <input id="adivinar" type="text" placeholder="Escribe la palabra que crees que es">
-    <button id="botonAdivinar">Adivinar</button>
-    <div class="row justify-content-center">
-        <button id="botonReiniciar">Reiniciar</button>
-    </div>
-    <script src="./script/script.js"></script>
-</body>
+    <body class="bg-secondary m-2">
+        <div id="principal" class="container bg-white">
+            <div class="row justify-content-center titulo-principal text-white">
+                <h1 class="h1">JUEGO DEL AHORCADO</h1>
+            </div>
+            <div class="row">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <img id="imagen_ahorcado" src="img/0_fallos.png" class="estilo-imagen" alt="Imagen juego ahorcado">
+                    </div>
+                    <div id="palabra" class="row justify-content-center contenedor-letras-secreto">
+                    </div>
+                    <div class="row">
+                        <div class="container my-2 w-25">
+                            <div class="row justify-content-center rounded-top bg-morado text-white">
+                                Letras Fallidas
+                            </div>
+                            <div id="letras_fallidas"
+                                class="row align-content-center justify-content-center borde-morado rounded-bottom contenedor-letras">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center bg-dark">
+                <div class="p-2 w-50">
+                    <div class="row">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text ancho-etiqueta bg-success text-white"
+                                    id="label_palabra_secreta">Palabra:</span>
+                            </div>
+                            <input id="palabra_secreta" type="text" class="form-control" placeholder="Escribe la palabra secreta y pulsa Iniciar"
+                                aria-describedby="label_palabra_secreta">
+                            <button id="boton_iniciar" class="btn btn-success ancho-boton">Iniciar</button>
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text ancho-etiqueta bg-primary text-white"
+                                    id="label_probar_letra">Letra:</span>
+                            </div>
+                            <input id="probar_letra" type="text" class="form-control" placeholder="Escribe la letra a probar"
+                                aria-describedby="label_probar_letra" maxlength="1" minlength="1" disabled>
+                            <button id="boton_probar" class="btn btn-primary ancho-boton" disabled>Probar</button>
+                        </div>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text ancho-etiqueta bg-warning" id="label_adivinar">¿Ya
+                                    sabes?</span>
+                            </div>
+                            <input id="adivinar" type="text" class="form-control" placeholder="Escribe la palabra que crees que es"
+                                aria-describedby="label_adivinar" disabled>
+                            <button id="boton_adivinar" class="btn btn-warning ancho-boton" disabled>Adivinar</button>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <button id="boton_finalizar" class="btn btn-danger ancho-boton align-self-end">Reiniciar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="script/script.js"></script>
+    </body>
 </html>
