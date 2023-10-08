@@ -1,57 +1,58 @@
-.ancho-etiqueta {
-    width: 100px;
+body{
+    margin: 0;
+    background: url(../img/fondo.jpg) no-repeat center;
+    background-size: cover;
+    font-family: 'Carter One', Arial, Helvetica, sans-serif;
+    min-height: 100vh;
 }
 
-.ancho-boton {
-    width: 100px;
-}
-
-.contenedor-letras {
-    min-height: 30px;
-}
-
-.contenedor-letras-secreto {
-    min-height: 45px;
-}
-
-.titulo-principal {
-    background: #1f1f1f;
-}
-
-.letra {
-    background: #4bb7c8;
-    border-radius: 10px;
-    color: #fff;
-    display: inline-block;
-    height: 40px;
-    width: 35px;
+header{
+    background: black;
+    padding: 10px;
     text-align: center;
-    margin-left: 2.5px;
-    margin-right: 2.5px;
-    font-size: 25px;    
+    margin-bottom: 20px;
 }
 
-.espacio {
-    display: inline-block;    
-    width: 30px;    
+h1{
+    margin: 0;
+    color: white;
 }
 
-.letra-gane {
-    background: #27a745;    
+main{
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background: rgba(255,255,255,.7);
+    display: flex;
+    gap: 30px;
 }
 
-.letra-perdida {
-    background: #dc3645;
+#imagen{
+    width: 200px;
 }
 
-.estilo-imagen {
-    height: 290px;
+#palabraOculta{
+    height: 3em;
 }
 
-.bg-morado {
-    background: #612daf;
+#palabraOculta span{
+    vertical-align: bottom;
+    font-size: 2em;
+    border-bottom: 2px solid black;
+    width: 30px;
+    text-align: center;
+    margin-right: 6px;
+    display: inline-block;
 }
 
-.borde-morado {
-    border: 1px solid #612daf;
+#letras{
+    margin-top: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+#letras button{
+    padding: 6px 0;
+    width: 30px;
 }

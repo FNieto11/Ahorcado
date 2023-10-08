@@ -1,79 +1,80 @@
-function seleccionarPalabra() {
-    const palabraDefinida = {
-        palabraFacil: "CURSO",
-        palabraMedia: "PROGRAMACION",
-        palabraDificil: "JAVASCRIPT"
-    }
+let palabraElegida;
+let errores = 0;
+let aciertos = 0;
 
-    function elegirPalabraAleatoria(array){
-        const indice = Math.ceil(Math.random() * array.length);
-        return array [indice];
-    }
+const palabras = ['CURSO','PROGRAMACION','JAVASCRIPT','DESARROLLO','TECNOLOGIA','FRONTEND','BACKEND','SERVIDOR','NAVEGADOR','SITIO','WEB','HTML','CSS','FRAMEWORK','DISEÑO','DATOS','RESPONSIVE','INTERFAZ','API','DOM','FUNCION','CODERHOUSE','OBJETOS','CONDICION','ARREGLOS','ESTILOS','DOCUMENTO','INTERVALO','LOGICA','RENDERIZAR','BOOTSTRAP'];
 
-    const palabraAleatoria = ["CURSO","PROGRAMACION","JAVASCRIPT","DESARROLLO","TECNOLOGIA","FRONTEND","BACKEND","SERVIDOR","NAVEGADOR","SITIO","WEB","HTML","CSS","FRAMEWORK","DISEÑO","DATOS","RESPONSIVE","INTERFAZ","API","DOM","FUNCION"];
-    const palabraAleatoriaElegida = elegirPalabraAleatoria(palabraAleatoria)
-
-    var entrada = prompt ('Bienvenido! Escoja el nivel de dificultad entre 1, 2 o 3. Si quiere una palabra al azar ingrese 4')
-
-    while (entrada<1 || entrada>4) {
-        var entrada = prompt ('Ups, debes elegir entre 1, 2 y 3. Puede elegir 4 si quiere una palabra al azar')
-    }
-
-    if (entrada == 1){
-        palabraSecreta = palabraDefinida.palabraFacil;
-    } else if (entrada == 2) {
-        palabraSecreta = palabraDefinida.palabraMedia;
-    } else if (entrada == 3) {
-        palabraSecreta = palabraDefinida.palabraDificil;
-    } else {
-        palabraSecreta = palabraAleatoriaElegida;
-    }
-
-    return palabraSecreta;
+function id (str){
+    return document.getElementById(str);
 }
 
-function ocultarPalabra(palabra) {
-    return "_".repeat(palabra.length);
+const palabraAleatoria = id('palabraAleatoria');
+const imagen  = id ('imagenAhorcado');
+const botonLetras = document.querySelectorAll('#letras button');
+
+palabraAleatoria.addEventListener('click', iniciarAleatorio);
+
+function iniciarAleatorio(event){
+    imagen.src = '../img/0_fallos.png'
+    palabraAleatoria.disabled=true;
+    for(let i=0; i<botonLetras.length; i++){
+        botonLetras[i].disabled=false;
+    }
+    errores = 0;
+    aciertos = 0;
+    const palabraOculta = id('palabraOculta');
+    palabraOculta.innerHTML = '';
+    const valor = Math.floor(Math.random() * palabras.length);
+    palabraElegida = palabras[valor];
+    console.log(palabraElegida);
+    for(let i=0; i<palabraElegida.length; i++){
+        palabraOculta.appendChild(document.createElement('span'));
+    }
 }
 
-function mostrarEstado(palabraAdivinada, intentosRestantes) {
-    alert("La palabra tiene: " + palabraSecreta.length +" letras" + "\nPalabra a adivinar: " + palabraAdivinada + "\nIntentos restantes: " + intentosRestantes);
+for(let i=0; i<botonLetras.length; i++){
+    botonLetras[i].addEventListener('click', clickLetras);
 }
 
-function jugarAhorcado() {
-    var palabraSecreta = seleccionarPalabra();
-    var palabraAdivinada = ocultarPalabra(palabraSecreta);
-    var intentosMaximos = 6;
-    var intentos = 0;
+function clickLetras (event){
+    const posicion = document.querySelectorAll('#palabraOculta span')
+    const botonLetra = event.target;
+    botonLetra.disabled = true;
+    const letra = botonLetra.innerHTML.toUpperCase( );
+    const palabra = palabraElegida.toUpperCase( );
 
-    while (intentos < intentosMaximos) {
-        mostrarEstado(palabraAdivinada, intentosMaximos - intentos);
-
-        var letra = prompt("Ingresa una letra:").toUpperCase();
-
-        if (palabraSecreta.includes(letra)) {
-            for (var i = 0; i < palabraSecreta.length; i++) {
-                if (palabraSecreta[i] == letra) {
-                    palabraAdivinada = palabraAdivinada.substr(0, i) + letra + palabraAdivinada.substr(i + 1);
-                }
-            }
-
-            if (palabraAdivinada == palabraSecreta) {
-                mostrarEstado(palabraAdivinada, intentosMaximos - intentos);
-                alert("¡Felicidades! Adivinaste la palabra: " + palabraSecreta);
-                jugarAhorcado();
-                break;
-            }
-        } else {
-            intentos++;
+    let intento = false;
+    for( let i = 0; i < palabra.length;  i++ ){
+        if( letra == palabra[i] ){
+            posicion[i].innerHTML = letra;
+            aciertos++;
+            intento = true;
         }
     }
 
-    if (intentos == intentosMaximos) {
-        mostrarEstado(palabraAdivinada, 0);
-        alert("¡Se acabaron los intentos! La palabra era: " + palabraSecreta);
-        jugarAhorcado();
+    if(intento==false){
+        errores++;
+        imagen.src = `../img/${errores}_fallos.png`;
     }
+
+    if(errores == 7){
+        id('resultado').innerHTML = 'Perdiste, la palabra era '+palabraElegida;
+        gameOver();
+    }else if(aciertos == palabraElegida.length){
+        id('resultado').innerHTML = 'FELICIDADES, GANASTE!!!';
+        imagen.src = `../img/ganador.png`;
+        gameOver();
+    }
+
+    console.log('La letra ' + letra + ' en la palabra ' + palabra + ' ¿existe?: ' + intento);
 }
 
-jugarAhorcado();
+function gameOver(){
+    for(let i=0; i<botonLetras.length; i++){
+        botonLetras[i].disabled=true;
+    }
+    palabraAleatoria.disabled=false;
+}
+
+gameOver();
+
