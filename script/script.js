@@ -20,6 +20,7 @@ function iniciarAleatorio(event){
     for(let i=0; i<botonLetras.length; i++){
         botonLetras[i].disabled=false;
     }
+    id('resultado').innerHTML = '';
     errores = 0;
     aciertos = 0;
     const palabraOculta = id('palabraOculta');
