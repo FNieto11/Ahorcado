@@ -1,9 +1,19 @@
 let palabraElegida;
 let errores = 0;
 let aciertos = 0;
-let jugados = localStorage.getItem('jugados');
-let ganados = localStorage.getItem('ganados');
-let perdidos = localStorage.getItem('perdidos');
+let jugados;
+let ganados;
+let perdidos;
+
+if (localStorage.getItem('jugados') === null){
+    jugados = 0;
+    ganados = 0;
+    perdidos = 0;
+} else {
+    jugados = localStorage.getItem('jugados');
+    ganados = localStorage.getItem('ganados');
+    perdidos = localStorage.getItem('perdidos');
+}
 
 const palabras = ['CURSO','PROGRAMACION','JAVASCRIPT','DESARROLLO','TECNOLOGIA','FRONTEND','BACKEND','SERVIDOR','NAVEGADOR','SITIO','WEB','HTML','CSS','FRAMEWORK','DISEÑO','DATOS','RESPONSIVE','INTERFAZ','API','DOM','FUNCION','CODERHOUSE','OBJETOS','CONDICION','ARREGLOS','ESTILOS','DOCUMENTO','INTERVALO','LOGICA','RENDERIZAR','BOOTSTRAP'];
 
