@@ -1,6 +1,9 @@
 let palabraElegida;
 let errores = 0;
 let aciertos = 0;
+let jugados = localStorage.getItem('jugados');
+let ganados = localStorage.getItem('ganados');
+let perdidos = localStorage.getItem('perdidos');
 
 const palabras = ['CURSO','PROGRAMACION','JAVASCRIPT','DESARROLLO','TECNOLOGIA','FRONTEND','BACKEND','SERVIDOR','NAVEGADOR','SITIO','WEB','HTML','CSS','FRAMEWORK','DISEÑO','DATOS','RESPONSIVE','INTERFAZ','API','DOM','FUNCION','CODERHOUSE','OBJETOS','CONDICION','ARREGLOS','ESTILOS','DOCUMENTO','INTERVALO','LOGICA','RENDERIZAR','BOOTSTRAP'];
 
@@ -14,8 +17,8 @@ const botonLetras = document.querySelectorAll('#letras button');
 
 palabraAleatoria.addEventListener('click', iniciarAleatorio);
 
-function iniciarAleatorio(event){
-    imagen.src = '../img/0_fallos.png'
+function iniciarAleatorio(){
+    imagen.src = './img/0_fallos.png'
     palabraAleatoria.disabled=true;
     for(let i=0; i<botonLetras.length; i++){
         botonLetras[i].disabled=false;
@@ -55,15 +58,19 @@ function clickLetras (event){
 
     if(intento==false){
         errores++;
-        imagen.src = `../img/${errores}_fallos.png`;
+        imagen.src = `./img/${errores}_fallos.png`;
     }
 
     if(errores == 7){
         id('resultado').innerHTML = 'Perdiste, la palabra era '+palabraElegida;
+        jugados++;
+        perdidos++;
         gameOver();
     }else if(aciertos == palabraElegida.length){
         id('resultado').innerHTML = 'FELICIDADES, GANASTE!!!';
-        imagen.src = `../img/ganador.png`;
+        imagen.src = `./img/ganador.png`;
+        jugados++;
+        ganados++;
         gameOver();
     }
 
@@ -75,7 +82,28 @@ function gameOver(){
         botonLetras[i].disabled=true;
     }
     palabraAleatoria.disabled=false;
+    localStorage.setItem('jugados',jugados);
+    localStorage.setItem('ganados',ganados);
+    localStorage.setItem('perdidos',perdidos);
+    id('jugados').innerHTML = 'Partidas Jugadas: '+jugados;
+    id('ganados').innerHTML = 'Partidas ganadas: '+ganados;
+    id('perdidos').innerHTML = 'Partidas ganadas: '+perdidos;
 }
+
+id('reiniciarEstadistica').addEventListener('click', reiniciarEstadistica);
+
+function reiniciarEstadistica(){
+    jugados = 0;
+    ganados = 0;
+    perdidos = 0;
+    localStorage.setItem('jugados',jugados);
+    localStorage.setItem('ganados',ganados);
+    localStorage.setItem('perdidos',perdidos);
+    id('jugados').innerHTML = 'Partidas Jugadas: '+jugados;
+    id('ganados').innerHTML = 'Partidas ganadas: '+ganados;
+    id('perdidos').innerHTML = 'Partidas ganadas: '+perdidos;
+}
+
 
 gameOver();
 
