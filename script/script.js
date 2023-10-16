@@ -1,35 +1,67 @@
 let palabraElegida;
-let errores = 0;
-let aciertos = 0;
+let errores;
+let aciertos;
 let jugados;
 let ganados;
 let perdidos;
 
-if (localStorage.getItem('jugados') === null){
-    jugados = 0;
-    ganados = 0;
-    perdidos = 0;
-} else {
-    jugados = localStorage.getItem('jugados');
-    ganados = localStorage.getItem('ganados');
-    perdidos = localStorage.getItem('perdidos');
-}
-
-const palabras = ['CURSO','PROGRAMACION','JAVASCRIPT','DESARROLLO','TECNOLOGIA','FRONTEND','BACKEND','SERVIDOR','NAVEGADOR','SITIO','WEB','HTML','CSS','FRAMEWORK','DISEÑO','DATOS','RESPONSIVE','INTERFAZ','API','DOM','FUNCION','CODERHOUSE','OBJETOS','CONDICION','ARREGLOS','ESTILOS','DOCUMENTO','INTERVALO','LOGICA','RENDERIZAR','BOOTSTRAP'];
+localStorage.getItem('jugados') === null ? jugados = 0 : jugados = localStorage.getItem('jugados');
+localStorage.getItem('jugados') === null ? ganados = 0 : ganados = localStorage.getItem('ganados');
+localStorage.getItem('jugados') === null ? perdidos = 0 : perdidos = localStorage.getItem('perdidos');
 
 function id (str){
     return document.getElementById(str);
 }
 
-const palabraAleatoria = id('palabraAleatoria');
-const imagen  = id ('imagenAhorcado');
+const palabras = ['CURSO','PROGRAMACION','JAVASCRIPT','DESARROLLO','TECNOLOGIA','FRONTEND','BACKEND','SERVIDOR','NAVEGADOR','SITIO','WEB','HTML','CSS','FRAMEWORK','DISEÑO','DATOS','RESPONSIVE','INTERFAZ','API','DOM','FUNCION','CODERHOUSE','OBJETOS','CONDICION','ARREGLOS','ESTILOS','DOCUMENTO','INTERVALO','LOGICA','RENDERIZAR','BOOTSTRAP'];
+
 const botonLetras = document.querySelectorAll('#letras button');
 
-palabraAleatoria.addEventListener('click', iniciarAleatorio);
+id('palabraRapida').addEventListener('click', iniciarRapido);
+
+function iniciarRapido(){
+    const valor = Math.floor(Math.random() * palabras.length);
+    sessionStorage.setItem('palabraElegida',palabras[valor]);
+    juego();
+}
+
+id('palabraAleatoria').addEventListener('click', iniciarAleatorio);
 
 function iniciarAleatorio(){
-    imagen.src = './img/0_fallos.png'
-    palabraAleatoria.disabled=true;
+    fetch('https://clientes.api.greenborn.com.ar/public-random-word')
+    .then(response => response.json())
+    .then(data => 
+        {sessionStorage.setItem('palabraElegida',...data);
+        juego();
+    });
+}
+
+id('palabraEscrita').addEventListener('click', iniciarEscrita);
+
+function iniciarEscrita(){
+    Swal.fire({
+        title: 'Ingrese palabra a adivinar',
+        input: 'text',
+        showCancelButton: true,
+        confirmButtonText: 'Adivinar',
+        cancelButtonText: 'Cancelar',
+        preConfirm: (login) => {
+            sessionStorage.setItem('palabraElegida',login)
+        }
+    }).then((result)=>{
+        if (result.isConfirmed){
+            juego();
+        } else if (result.isDenied){
+            gameOver();
+        }
+    })
+}
+
+function juego(){
+    id ('imagenAhorcado').src = './img/0_fallos.png'
+    id('palabraRapida').disabled=true;
+    id('palabraAleatoria').disabled=true;
+    id('palabraEscrita').disabled=true;
     for(let i=0; i<botonLetras.length; i++){
         botonLetras[i].disabled=false;
     }
@@ -38,9 +70,7 @@ function iniciarAleatorio(){
     aciertos = 0;
     const palabraOculta = id('palabraOculta');
     palabraOculta.innerHTML = '';
-    const valor = Math.floor(Math.random() * palabras.length);
-    palabraElegida = palabras[valor];
-    console.log(palabraElegida);
+    palabraElegida = sessionStorage.getItem('palabraElegida').toUpperCase( ).normalize("NFD").replace(/[\u0300-\u036f]/g,"");
     for(let i=0; i<palabraElegida.length; i++){
         palabraOculta.appendChild(document.createElement('span'));
     }
@@ -68,7 +98,7 @@ function clickLetras (event){
 
     if(intento==false){
         errores++;
-        imagen.src = `./img/${errores}_fallos.png`;
+        id ('imagenAhorcado').src = `./img/${errores}_fallos.png`;
     }
 
     if(errores == 7){
@@ -78,42 +108,57 @@ function clickLetras (event){
         gameOver();
     }else if(aciertos == palabraElegida.length){
         id('resultado').innerHTML = 'FELICIDADES, GANASTE!!!';
-        imagen.src = `./img/ganador.png`;
+        id ('imagenAhorcado').src = `./img/ganador.png`;
         jugados++;
         ganados++;
         gameOver();
     }
-
-    console.log('La letra ' + letra + ' en la palabra ' + palabra + ' ¿existe?: ' + intento);
 }
 
 function gameOver(){
     for(let i=0; i<botonLetras.length; i++){
         botonLetras[i].disabled=true;
     }
-    palabraAleatoria.disabled=false;
+    id('palabraRapida').disabled=false;
+    id('palabraAleatoria').disabled=false;
+    id('palabraEscrita').disabled=false;
     localStorage.setItem('jugados',jugados);
     localStorage.setItem('ganados',ganados);
     localStorage.setItem('perdidos',perdidos);
     id('jugados').innerHTML = 'Partidas Jugadas: '+jugados;
     id('ganados').innerHTML = 'Partidas ganadas: '+ganados;
-    id('perdidos').innerHTML = 'Partidas ganadas: '+perdidos;
+    id('perdidos').innerHTML = 'Partidas perdidas: '+perdidos;
 }
 
 id('reiniciarEstadistica').addEventListener('click', reiniciarEstadistica);
 
 function reiniciarEstadistica(){
-    jugados = 0;
-    ganados = 0;
-    perdidos = 0;
-    localStorage.setItem('jugados',jugados);
-    localStorage.setItem('ganados',ganados);
-    localStorage.setItem('perdidos',perdidos);
-    id('jugados').innerHTML = 'Partidas Jugadas: '+jugados;
-    id('ganados').innerHTML = 'Partidas ganadas: '+ganados;
-    id('perdidos').innerHTML = 'Partidas ganadas: '+perdidos;
+    Swal.fire({
+        title: 'Reiniciar Estadística',
+        text: '¿Seguro que quieres Reiniciar la estadística?',
+        icon: 'question',
+        showDenyButton: true,
+        confirmButtonText: 'Sí',
+        denyButtonText: 'No',
+    }).then((result)=>{
+        if (result.isConfirmed){
+            jugados = 0;
+            ganados = 0;
+            perdidos = 0;
+            localStorage.setItem('jugados',jugados);
+            localStorage.setItem('ganados',ganados);
+            localStorage.setItem('perdidos',perdidos);
+            id('jugados').innerHTML = 'Partidas Jugadas: '+jugados;
+            id('ganados').innerHTML = 'Partidas ganadas: '+ganados;
+            id('perdidos').innerHTML = 'Partidas perdidas: '+perdidos;
+        } else if (result.isDenied){
+            id('jugados').innerHTML = 'Partidas Jugadas: '+jugados;
+            id('ganados').innerHTML = 'Partidas ganadas: '+ganados;
+            id('perdidos').innerHTML = 'Partidas perdidas: '+perdidos;
+        }
+    
+    })
 }
-
 
 gameOver();
 
