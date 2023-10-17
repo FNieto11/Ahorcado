@@ -36,6 +36,7 @@ main{
 }
 
 #palabraOculta span{
+    height: 1.5em;
     vertical-align: bottom;
     font-size: 2em;
     border-bottom: 2px solid black;
