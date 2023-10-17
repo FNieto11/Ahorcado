@@ -70,7 +70,7 @@ function juego(){
     aciertos = 0;
     const palabraOculta = id('palabraOculta');
     palabraOculta.innerHTML = '';
-    palabraElegida = sessionStorage.getItem('palabraElegida').toUpperCase( ).normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+    palabraElegida = sessionStorage.getItem('palabraElegida').toUpperCase( ).replace(/Á/g, "A").replace(/É/g, "E").replace(/Í/g, "I").replace(/Ó/g, "O").replace(/Ú/g, "U");
     for(let i=0; i<palabraElegida.length; i++){
         palabraOculta.appendChild(document.createElement('span'));
     }
