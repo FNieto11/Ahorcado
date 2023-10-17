@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./css/styles.css">
     <title>Ahorcado</title>
@@ -13,47 +14,49 @@
     </header>
     <main>
         <img id="imagenAhorcado" src="./img/0_fallos.png" alt="Ahorcado">
-        <div>
-            <p id="palabraOculta">
-            </p>
-            <button id="palabraRapida">Palabra Rápida</button>
-            <button id="palabraAleatoria">Palabra Aleatoria</button>
-            <button id="palabraEscrita">Escribir Palabra</button>
+        <div id="contenedor">
+            <p id="palabraOculta"></p>
+            <button type="button" class="btn" id="palabraRapida">Palabra Rápida</button>
+            <button type="button" class="btn" id="palabraAleatoria">Palabra Aleatoria</button>
+            <button type="button" class="btn" id="palabraEscrita">Escribir Palabra</button>
             <p id="resultado"></p>
             <div id="letras">
-                <button>A</button>
-                <button>B</button>
-                <button>C</button>
-                <button>D</button>
-                <button>E</button>
-                <button>F</button>
-                <button>G</button>
-                <button>H</button>
-                <button>I</button>
-                <button>J</button>
-                <button>K</button>
-                <button>L</button>
-                <button>M</button>
-                <button>N</button>
-                <button>Ñ</button>
-                <button>O</button>
-                <button>P</button>
-                <button>Q</button>
-                <button>R</button>
-                <button>S</button>
-                <button>T</button>
-                <button>U</button>
-                <button>V</button>
-                <button>W</button>
-                <button>X</button>
-                <button>Y</button>
-                <button>Z</button>
+                <button type="button" class="btn">A</button>
+                <button type="button" class="btn">B</button>
+                <button type="button" class="btn">C</button>
+                <button type="button" class="btn">D</button>
+                <button type="button" class="btn">E</button>
+                <button type="button" class="btn">F</button>
+                <button type="button" class="btn">G</button>
+                <button type="button" class="btn">H</button>
+                <button type="button" class="btn">I</button>
+                <button type="button" class="btn">J</button>
+                <button type="button" class="btn">K</button>
+                <button type="button" class="btn">L</button>
+                <button type="button" class="btn">M</button>
+                <button type="button" class="btn">N</button>
+                <button type="button" class="btn">Ñ</button>
+                <button type="button" class="btn">O</button>
+                <button type="button" class="btn">P</button>
+                <button type="button" class="btn">Q</button>
+                <button type="button" class="btn">R</button>
+                <button type="button" class="btn">S</button>
+                <button type="button" class="btn">T</button>
+                <button type="button" class="btn">U</button>
+                <button type="button" class="btn">V</button>
+                <button type="button" class="btn">W</button>
+                <button type="button" class="btn">X</button>
+                <button type="button" class="btn">Y</button>
+                <button type="button" class="btn">Z</button>
             </div>
-            <div>
-                <p id="jugados"></p>
-                <p id="ganados"></p>
-                <p id="perdidos"></p>
-                <button id="reiniciarEstadistica">Reiniciar Estadística</button>
+            <div id="estadistica">
+                <h4>Estadística</h4>
+                <div id="partidas">
+                    <p id="jugados"></p>
+                    <p id="ganados"></p>
+                    <p id="perdidos"></p>
+                </div>
+                <button type="button" class="btn btn-danger" id="reiniciarEstadistica">Reiniciar Estadística</button>
             </div>
         </div>
     </main>

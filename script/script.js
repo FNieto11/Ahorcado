@@ -69,12 +69,16 @@ function validarPalabra (palabra){
 }
 
 function juego(){
-    id ('imagenAhorcado').src = './img/0_fallos.png'
+    id('imagenAhorcado').src = './img/0_fallos.png'
     id('palabraRapida').disabled=true;
     id('palabraAleatoria').disabled=true;
     id('palabraEscrita').disabled=true;
+    id('palabraRapida').style.backgroundColor = 'rgba(112, 102, 224, 0.5)';
+    id('palabraAleatoria').style.backgroundColor = 'rgba(112, 102, 224, 0.5)';
+    id('palabraEscrita').style.backgroundColor = 'rgba(112, 102, 224, 0.5)';
     for(let i=0; i<botonLetras.length; i++){
         botonLetras[i].disabled=false;
+        botonLetras[i].style.backgroundColor = 'rgba(112, 102, 224, 1)';
     }
     id('resultado').innerHTML = '';
     errores = 0;
@@ -95,6 +99,7 @@ function clickLetras (event){
     const posicion = document.querySelectorAll('#palabraOculta span')
     const botonLetra = event.target;
     botonLetra.disabled = true;
+    botonLetra.style.backgroundColor = 'rgba(112, 102, 224, .5)';
     const letra = botonLetra.innerHTML.toUpperCase( );
     const palabra = palabraElegida.toUpperCase( );
 
@@ -114,11 +119,13 @@ function clickLetras (event){
 
     if(errores == 7){
         id('resultado').innerHTML = 'Perdiste, la palabra era '+palabraElegida;
+        id('resultado').style.marginTop = '10px';
         jugados++;
         perdidos++;
         gameOver();
     }else if(aciertos == palabraElegida.length){
         id('resultado').innerHTML = 'FELICIDADES, GANASTE!!!';
+        id('resultado').style.marginTop = '10px';
         id ('imagenAhorcado').src = `./img/ganador.png`;
         jugados++;
         ganados++;
@@ -129,10 +136,14 @@ function clickLetras (event){
 function gameOver(){
     for(let i=0; i<botonLetras.length; i++){
         botonLetras[i].disabled=true;
+        botonLetras[i].style.backgroundColor = 'rgba(112, 102, 224, 0.5)';
     }
     id('palabraRapida').disabled=false;
     id('palabraAleatoria').disabled=false;
     id('palabraEscrita').disabled=false;
+    id('palabraRapida').style.backgroundColor = 'rgba(112, 102, 224, 1)';
+    id('palabraAleatoria').style.backgroundColor = 'rgba(112, 102, 224, 1)';
+    id('palabraEscrita').style.backgroundColor = 'rgba(112, 102, 224, 1)';
     localStorage.setItem('jugados',jugados);
     localStorage.setItem('ganados',ganados);
     localStorage.setItem('perdidos',perdidos);

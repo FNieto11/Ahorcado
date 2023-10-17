@@ -22,13 +22,13 @@ main{
     width: 80%;
     margin: auto;
     padding: 20px;
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.8);
     display: flex;
     gap: 30px;
 }
 
-#imagen{
-    width: 200px;
+#imagenAhorcado{
+    width: 400px;
 }
 
 #palabraOculta{
@@ -40,7 +40,7 @@ main{
     font-size: 2em;
     border-bottom: 2px solid black;
     width: 30px;
-    text-align: center;
+    text-align: bottom;
     margin-right: 6px;
     display: inline-block;
 }
@@ -54,5 +54,25 @@ main{
 
 #letras button{
     padding: 6px 0;
-    width: 30px;
+    width: 40px;
+    color: #fff;
+    font-family: 'Carter One', Arial, Helvetica, sans-serif;
+}
+
+#palabraRapida,#palabraAleatoria,#palabraEscrita{
+    color: #fff;
+    font-family: 'Carter One', Arial, Helvetica, sans-serif;
+    margin-right: 5px;
+}
+
+#estadistica{
+    margin-top: 10px;
+}
+
+#partidas{
+    display: flex;
+}
+
+#ganados{
+    margin: 0px 20px;
 }
