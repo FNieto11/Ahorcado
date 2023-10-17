@@ -84,6 +84,7 @@ function juego(){
     errores = 0;
     aciertos = 0;
     const palabraOculta = id('palabraOculta');
+    id('palabraOculta').style.height ='auto';
     palabraOculta.innerHTML = '';
     palabraElegida = sessionStorage.getItem('palabraElegida').toUpperCase( ).replace(/Á/g, "A").replace(/É/g, "E").replace(/Í/g, "I").replace(/Ó/g, "O").replace(/Ú/g, "U");
     for(let i=0; i<palabraElegida.length; i++){
