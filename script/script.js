@@ -45,6 +45,13 @@ function iniciarEscrita(){
         showCancelButton: true,
         confirmButtonText: 'Adivinar',
         cancelButtonText: 'Cancelar',
+        inputValidator: (value) => {
+            if (!value) {
+                return 'Es necesario que escriba una palabra!'
+            } else if (!validarPalabra(value)){
+                return 'Solo se pueden ingresar letras!'
+            }
+        },
         preConfirm: (login) => {
             sessionStorage.setItem('palabraElegida',login)
         }
@@ -55,6 +62,10 @@ function iniciarEscrita(){
             gameOver();
         }
     })
+}
+
+function validarPalabra (palabra){
+    return /^[A-Za-zñÑáÁéÉíÍóÓúÚ]+$/.test(palabra)
 }
 
 function juego(){
