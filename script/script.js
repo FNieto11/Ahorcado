@@ -65,7 +65,7 @@ function iniciarEscrita(){
 }
 
 function validarPalabra (palabra){
-    return /^[A-Za-zñÑáÁéÉíÍóÓúÚ]+$/.test(palabra)
+    return /^[A-Za-zñÑáÁéÉíÍóÓúÚüÜ]+$/.test(palabra)
 }
 
 function juego(){
@@ -86,7 +86,7 @@ function juego(){
     const palabraOculta = id('palabraOculta');
     id('palabraOculta').style.height ='auto';
     palabraOculta.innerHTML = '';
-    palabraElegida = sessionStorage.getItem('palabraElegida').toUpperCase( ).replace(/Á/g, "A").replace(/É/g, "E").replace(/Í/g, "I").replace(/Ó/g, "O").replace(/Ú/g, "U");
+    palabraElegida = sessionStorage.getItem('palabraElegida').toUpperCase( ).replace(/Á/g, "A").replace(/É/g, "E").replace(/Í/g, "I").replace(/Ó/g, "O").replace(/Ú/g, "U").replace(/Ü/g, "U");
     for(let i=0; i<palabraElegida.length; i++){
         palabraOculta.appendChild(document.createElement('span'));
     }
